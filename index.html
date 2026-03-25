@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Biziship for Odoo | The First Agentic AI for Odoo Logistics</title>
+  <meta name="description" content="Stop just connecting to carriers. Start optimizing your entire global supply chain. Biziship integrates seamlessly with Odoo to turn your ERP into a self-driving logistics engine." />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy: #0a1628;
+      --blue: #1a4fd6;
+      --blue-light: #2563eb;
+      --accent: #00c2ff;
+      --text: #1e293b;
+      --muted: #64748b;
+      --bg: #f8fafc;
+      --white: #ffffff;
+      --border: #e2e8f0;
+      --green: #10b981;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      color: var(--text);
+      background: var(--white);
+      line-height: 1.6;
+    }
+
+    /* NAV */
+    nav {
+      background: var(--navy);
+      padding: 16px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    nav .logo {
+      color: var(--white);
+      font-size: 1.4rem;
+      font-weight: 700;
+      text-decoration: none;
+      letter-spacing: -0.5px;
+    }
+    nav .logo span { color: var(--accent); }
+    nav a.nav-cta {
+      background: var(--blue-light);
+      color: var(--white);
+      padding: 8px 20px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 600;
+      transition: background 0.2s;
+    }
+    nav a.nav-cta:hover { background: var(--blue); }
+
+    /* HERO */
+    .hero {
+      background: linear-gradient(135deg, var(--navy) 0%, #0f2d6e 100%);
+      color: var(--white);
+      padding: 100px 40px 80px;
+      text-align: center;
+    }
+    .hero .badge {
+      display: inline-block;
+      background: rgba(0,194,255,0.15);
+      color: var(--accent);
+      border: 1px solid rgba(0,194,255,0.3);
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 28px;
+    }
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 800;
+      line-height: 1.15;
+      max-width: 800px;
+      margin: 0 auto 24px;
+      letter-spacing: -1px;
+    }
+    .hero h1 span { color: var(--accent); }
+    .hero p {
+      font-size: 1.2rem;
+      color: #94a3b8;
+      max-width: 680px;
+      margin: 0 auto 44px;
+      line-height: 1.7;
+    }
+    .hero-ctas {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .btn-primary {
+      background: var(--blue-light);
+      color: var(--white);
+      padding: 14px 32px;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.1s;
+      display: inline-block;
+    }
+    .btn-primary:hover { background: var(--blue); transform: translateY(-1px); }
+    .btn-secondary {
+      background: transparent;
+      color: var(--white);
+      padding: 14px 32px;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      text-decoration: none;
+      border: 2px solid rgba(255,255,255,0.3);
+      transition: border-color 0.2s;
+      display: inline-block;
+    }
+    .btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* SECTIONS */
+    section { padding: 80px 40px; }
+    .container { max-width: 960px; margin: 0 auto; }
+    .section-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--blue-light);
+      margin-bottom: 12px;
+    }
+    h2 {
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 800;
+      line-height: 1.2;
+      letter-spacing: -0.5px;
+      margin-bottom: 16px;
+    }
+    .section-intro {
+      font-size: 1.1rem;
+      color: var(--muted);
+      max-width: 680px;
+      margin-bottom: 48px;
+      line-height: 1.7;
+    }
+
+    /* PROBLEM */
+    .problem { background: var(--bg); }
+    .problem-box {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--blue-light);
+      border-radius: 8px;
+      padding: 32px;
+      margin-top: 32px;
+    }
+    .problem-box p { font-size: 1.05rem; line-height: 1.7; color: var(--text); }
+    .problem-box strong { color: var(--blue-light); }
+
+    /* FEATURES */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 28px;
+      margin-top: 16px;
+    }
+    .feature-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 32px;
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+    .feature-card:hover { box-shadow: 0 8px 32px rgba(26,79,214,0.1); transform: translateY(-2px); }
+    .feature-icon {
+      width: 48px;
+      height: 48px;
+      background: linear-gradient(135deg, var(--blue-light), var(--accent));
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+      font-size: 1.4rem;
+    }
+    .feature-card h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 12px; }
+    .feature-card ul { list-style: none; padding: 0; }
+    .feature-card ul li {
+      font-size: 0.95rem;
+      color: var(--muted);
+      padding: 6px 0;
+      padding-left: 20px;
+      position: relative;
+      line-height: 1.5;
+    }
+    .feature-card ul li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 14px;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+    .feature-card .tag {
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--blue-light);
+      background: rgba(37,99,235,0.08);
+      padding: 3px 10px;
+      border-radius: 4px;
+      margin-bottom: 8px;
+      display: inline-block;
+    }
+
+    /* COMPARISON */
+    .comparison { background: var(--bg); }
+    .table-wrap { overflow-x: auto; margin-top: 16px; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--white);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 1px 8px rgba(0,0,0,0.06);
+    }
+    thead tr { background: var(--navy); color: var(--white); }
+    thead th {
+      padding: 18px 24px;
+      text-align: left;
+      font-size: 0.9rem;
+      font-weight: 700;
+    }
+    thead th:nth-child(3) { background: var(--blue-light); }
+    tbody tr { border-bottom: 1px solid var(--border); }
+    tbody tr:last-child { border-bottom: none; }
+    tbody td {
+      padding: 16px 24px;
+      font-size: 0.95rem;
+      color: var(--text);
+    }
+    tbody td:first-child { font-weight: 600; }
+    tbody td:nth-child(2) { color: var(--muted); }
+    tbody td:nth-child(3) { color: var(--blue-light); font-weight: 600; }
+    tbody tr:hover { background: #f1f5f9; }
+
+    /* HOW IT WORKS */
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 0;
+      margin-top: 48px;
+      position: relative;
+    }
+    .steps::before {
+      content: '';
+      position: absolute;
+      top: 28px;
+      left: calc(12.5% + 24px);
+      right: calc(12.5% + 24px);
+      height: 2px;
+      background: linear-gradient(90deg, var(--blue-light), var(--accent));
+    }
+    .step {
+      text-align: center;
+      padding: 0 20px;
+    }
+    .step-num {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--blue-light), var(--accent));
+      color: var(--white);
+      font-size: 1.2rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      position: relative;
+      z-index: 1;
+      box-shadow: 0 4px 16px rgba(37,99,235,0.3);
+    }
+    .step h3 { font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
+    .step p { font-size: 0.9rem; color: var(--muted); line-height: 1.5; }
+
+    /* CTA */
+    .cta-section {
+      background: linear-gradient(135deg, var(--navy) 0%, #0f2d6e 100%);
+      color: var(--white);
+      text-align: center;
+    }
+    .cta-section h2 { color: var(--white); margin-bottom: 16px; }
+    .cta-section p { color: #94a3b8; font-size: 1.1rem; max-width: 560px; margin: 0 auto 44px; }
+    .cta-section .btn-primary { font-size: 1.05rem; padding: 16px 36px; }
+    .cta-divider {
+      margin: 20px 0;
+      color: #64748b;
+      font-size: 0.9rem;
+    }
+    .cta-link {
+      color: var(--accent);
+      text-decoration: none;
+      font-size: 1rem;
+      font-weight: 600;
+      border-bottom: 1px solid rgba(0,194,255,0.3);
+      padding-bottom: 2px;
+      transition: border-color 0.2s;
+    }
+    .cta-link:hover { border-color: var(--accent); }
+
+    /* FOOTER */
+    footer {
+      background: var(--navy);
+      color: #475569;
+      text-align: center;
+      padding: 28px 40px;
+      font-size: 0.85rem;
+      border-top: 1px solid #1e3a5f;
+    }
+    footer a { color: #64748b; text-decoration: none; }
+    footer a:hover { color: var(--white); }
+
+    @media (max-width: 640px) {
+      nav { padding: 14px 20px; }
+      .hero, section { padding: 60px 20px; }
+      .steps::before { display: none; }
+      .steps { gap: 32px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="https://biziship.ai" class="logo">Bizi<span>Ship</span>.ai</a>
+  <a href="#cta" class="nav-cta">Get the Odoo App</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="badge">The First Agentic AI for Odoo Logistics</div>
+  <h1>The AI Upgrade Your Odoo Logistics<br /><span>Has Been Waiting For.</span></h1>
+  <p>Stop just "connecting" to carriers. Start optimizing your entire global supply chain. Biziship integrates seamlessly with Odoo to turn your ERP into a self-driving logistics engine.</p>
+  <div class="hero-ctas">
+    <a href="#cta" class="btn-primary">Get the Biziship Odoo App</a>
+    <a href="#cta" class="btn-secondary">Schedule a 15-Min Demo</a>
+  </div>
+</section>
+
+<!-- PROBLEM -->
+<section class="problem">
+  <div class="container">
+    <div class="section-label">The Odoo Gap</div>
+    <h2>Odoo manages your data.<br />Biziship makes it smarter.</h2>
+    <p class="section-intro">Odoo is the Swiss Army Knife of business software—a powerful ERP that connects your warehouse to carriers so you can print labels and track packages. But connection is not intelligence.</p>
+    <div class="problem-box">
+      <p>Standard Odoo shipping connectors are <strong>"dumb"</strong>—they show you rates and print labels, but they don't tell you if a port strike is coming, if a different carrier is 20% cheaper today, or if your customs paperwork is missing a critical HS code.</p>
+      <br />
+      <p><strong>Biziship.ai fills that gap.</strong> We are the <strong>Brain</strong> that sits on top of Odoo. While Odoo provides the <em>connection</em>, Biziship provides the <em>intelligence</em>.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section>
+  <div class="container">
+    <div class="section-label">Biziship + Odoo</div>
+    <h2>Three capabilities that change everything.</h2>
+    <p class="section-intro">From route optimization to zero-touch compliance, Biziship layers agentic AI directly onto your existing Odoo workflows.</p>
+    <div class="features-grid">
+
+      <div class="feature-card">
+        <div class="feature-icon">&#x1F9E0;</div>
+        <div class="tag">Route Optimization</div>
+        <h3>Agentic AI Route Optimization</h3>
+        <ul>
+          <li><strong>Beyond the Connector:</strong> Don't just pick a carrier—let our AI Agent scan thousands of routes in real-time.</li>
+          <li><strong>The Odoo Edge:</strong> Biziship pulls your Odoo Sales Orders and automatically assigns the most cost-effective, reliable shipping method based on live conditions—not static rate tables.</li>
+        </ul>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">&#x1F4CB;</div>
+        <div class="tag">Customs & Compliance</div>
+        <h3>Zero-Touch Customs & Compliance</h3>
+        <ul>
+          <li><strong>Automated Documentation:</strong> Biziship's AI reads your Odoo product descriptions and auto-generates accurate commercial invoices, packing lists, and customs declarations.</li>
+          <li><strong>Error Prevention:</strong> Eliminate "held at customs" delays. Our AI audits your Odoo data for compliance before the label is even printed.</li>
+        </ul>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">&#x26A1;</div>
+        <div class="tag">Exception Management</div>
+        <h3>Predictive Exception Management</h3>
+        <ul>
+          <li><strong>Proactive Alerts:</strong> If a shipment is delayed, Biziship doesn't just update tracking in Odoo—it alerts your team and suggests a solution before the customer notices.</li>
+          <li><strong>Real-Time Visibility:</strong> A unified dashboard that mirrors your Odoo Inventory but adds a layer of Global Intelligence.</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- COMPARISON -->
+<section class="comparison">
+  <div class="container">
+    <div class="section-label">Side by Side</div>
+    <h2>Why Biziship over standard Odoo connectors?</h2>
+    <p class="section-intro">See exactly where standard Odoo shipping ends—and where Biziship begins.</p>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th>Standard Odoo Shipping</th>
+            <th>Biziship.ai for Odoo</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Carrier Rates</td>
+            <td>Basic API Fetch</td>
+            <td>AI-Driven Cost Optimization</td>
+          </tr>
+          <tr>
+            <td>Documentation</td>
+            <td>Manual Entry / Basic Templates</td>
+            <td>Automated AI Gen (Customs Ready)</td>
+          </tr>
+          <tr>
+            <td>Problem Solving</td>
+            <td>Manual Tracking Checks</td>
+            <td>Predictive Delay Alerts</td>
+          </tr>
+          <tr>
+            <td>Setup</td>
+            <td>Complex Module Configuration</td>
+            <td>No-Code Integration in Minutes</td>
+          </tr>
+          <tr>
+            <td>Global Scale</td>
+            <td>Limited to Major Carriers</td>
+            <td>Access to Global Freight & Last-Mile</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section>
+  <div class="container">
+    <div class="section-label">How It Works</div>
+    <h2>Up and running in four steps.</h2>
+    <p class="section-intro">No complex configuration. No dev resources. Connect Biziship to Odoo in minutes and let the AI take it from there.</p>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <h3>Connect</h3>
+        <p>Install the Biziship App from the Odoo Marketplace or via API.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <h3>Sync</h3>
+        <p>Biziship automatically pulls your Inventory, Sales Orders, and Warehouse data.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <h3>Optimize</h3>
+        <p>Our AI analyzes every shipment, finding hidden savings and faster routes.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <h3>Execute</h3>
+        <p>One click in Odoo triggers the full Biziship workflow—labels, docs, and tracking synced back instantly.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="cta">
+  <div class="container">
+    <h2>Your Odoo logistics desk.<br />Running 24/7 on autopilot.</h2>
+    <p>Join the high-growth brands moving from "Shipping Management" to "Logistics Intelligence."</p>
+    <a href="https://biziship.ai" class="btn-primary">Get the Biziship Odoo App</a>
+    <div class="cta-divider">or</div>
+    <a href="https://biziship.ai" class="cta-link">Schedule a 15-minute Demo &rarr;</a>
+    <br /><br />
+    <p style="font-size:0.85rem; color:#475569;">See how much your Odoo setup could be saving in landed costs.</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>&copy; 2026 BiziShip.ai &mdash; <a href="https://biziship.ai">biziship.ai</a> &mdash; All rights reserved.</p>
+</footer>
+
+</body>
+</html>
